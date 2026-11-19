@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you reference XENOPHORA, its coupled 4D Kleinian-CGLE architecture, or its spectral optics shaders in research, talks, or artwork, please cite it using this metadata."
+title: "XENOPHORA: A Living 4D Non-Euclidean Piezo-Optical Manifold"
+version: 1.0.0
+date-released: 2026-11-19
+license: MIT
+repository-code: "https://github.com/0thernes/xenophora"
+url: "https://0thernes.github.io/xenophora/"
+authors:
+  - alias: "0thernes"
+    email: "0_0@0thernes.art"
+keywords:
+  - webgl2
+  - glsl
+  - raymarching
+  - 4d-geometry
+  - complex-ginzburg-landau
+  - artificial-life
+  - thin-film-interference
+  - diffraction
+  - generative-art
+  - procedural-audio

@@ -3,24 +3,35 @@
   "version": "1.0.0",
   "description": "Real-time 4D Non-Euclidean Piezo-Optical Manifold x Operator-Split Complex Ginzburg-Landau Chimera PDE in bare-metal WebGL2 / GLSL 300 es + Web Audio API.",
   "type": "module",
+  "homepage": "https://0thernes.github.io/xenophora/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/0thernes/xenophora.git"
+  },
+  "bugs": {
+    "url": "https://github.com/0thernes/xenophora/issues"
+  },
   "scripts": {
-    "start": "node server.mjs"
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs"
   },
   "keywords": [
     "webgl2",
     "glsl",
     "raymarching",
-    "4d",
+    "4d-geometry",
     "kleinian",
     "menger",
     "gyroid",
     "complex-ginzburg-landau",
     "pde",
+    "artificial-life",
     "thin-film-interference",
     "diffraction",
     "generative-art",
-    "web-audio"
+    "web-audio",
+    "zero-dependency"
   ],
-  "author": "0thernes",
+  "author": "0thernes <0_0@0thernes.art>",
   "license": "MIT"
 }

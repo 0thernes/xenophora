@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Live Real-Time Interactive Demo (GitHub Pages)
+    url: https://0thernes.github.io/xenophora/
+    about: Launch XENOPHORA directly in your browser to test specimens and reproduce behavior live
+  - name: Documentation Index & Glossary
+    url: https://github.com/0thernes/xenophora/blob/main/docs/INDEX.md
+    about: Browse architecture docs, papers, glossary, and reference provenance
