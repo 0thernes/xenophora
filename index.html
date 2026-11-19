@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>XENOPHORA — Living 4D Piezo-Optical Manifold</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <canvas id="gl-canvas"></canvas>
+
+  <!-- Subtle pulse reticle shown when injecting PDE waves on 3D surface -->
+  <div id="inject-reticle" class="inject-reticle" aria-hidden="true"></div>
+
+  <!-- HUD Layer -->
+  <div id="hud" class="hud">
+    <!-- Top-Left Museum Specimen Plaque -->
+    <header class="plaque">
+      <div class="plaque-top">
+        <span class="brand">XENOPHORA</span>
+        <span class="sep">/</span>
+        <span id="regime-code" class="regime-code">01 · ANEMONE ABYSS</span>
+      </div>
+      <div id="regime-subtitle" class="plaque-sub">
+        4D Pseudo-Kleinian Limit Set × Hopf Filament Iris × CGLE Chimera Skin
+      </div>
+      <div class="telemetry">
+        <span><em id="stat-fps">60</em> FPS</span>
+        <span class="dot">·</span>
+        <span><em id="stat-spp">1</em> SPP</span>
+        <span class="dot">·</span>
+        <span>4D θ <em id="stat-4d">0.00</em></span>
+        <span class="dot">·</span>
+        <span>FOC <em id="stat-focus">3.40</em>m</span>
+        <span class="dot">·</span>
+        <span id="stat-mode" class="mode-pill">LIVE PDE</span>
+      </div>
+    </header>
+
+    <!-- Top-Right Live GPU PDE Chimera Micro-Monitor & Drawer Toggle -->
+    <aside class="top-right">
+      <div class="pde-card" title="Live 512×512 GPU Complex Ginzburg-Landau Chimera Field — Click to inject a spiral singularity">
+        <canvas id="pde-preview" width="108" height="108"></canvas>
+        <div class="pde-meta">
+          <span class="pde-label">CGLE</span>
+          <span id="pde-vortices" class="pde-val">CHIMERA</span>
+        </div>
+      </div>
+      <button id="btn-drawer" class="icon-btn" title="Open Manifold Alchemy Inspector [I]">
+        <span class="btn-dot"></span>
+        <span>ALCH</span>
+      </button>
+    </aside>
+
+    <!-- Collapsible Right Laboratory Inspector Drawer -->
+    <section id="inspector" class="inspector collapsed" aria-label="Manifold Parameters">
+      <div class="inspector-head">
+        <span class="inspector-title">MANIFOLD ALCHEMY</span>
+        <button id="btn-close-inspector" class="tiny-btn" title="Collapse">✕</button>
+      </div>
+
+      <div class="inspector-scroll">
+        <!-- 4D & Non-Euclidean Topology -->
+        <div class="group">
+          <div class="group-title">4D METRIC &amp; TOPOLOGY</div>
+
+          <label class="slider-row">
+            <span class="s-head"><span>4D Clifford θ<sub>zw</sub></span><em id="val-rot4d">0.00</em></span>
+            <input id="sl-rot4d" type="range" min="-3.1416" max="3.1416" step="0.005" value="0.22" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>4D Clifford θ<sub>xw</sub></span><em id="val-rot4d2">0.00</em></span>
+            <input id="sl-rot4d2" type="range" min="-3.1416" max="3.1416" step="0.005" value="0.14" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Hyperbolic Fold Gain</span><em id="val-fold">1.00</em></span>
+            <input id="sl-fold" type="range" min="0.55" max="1.65" step="0.005" value="1.0" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Chimera Hybrid Blend</span><em id="val-morph">0.50</em></span>
+            <input id="sl-morph" type="range" min="0.0" max="1.0" step="0.005" value="0.5" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Tomographic 4D Slice</span><em id="val-slice">OFF</em></span>
+            <input id="sl-slice" type="range" min="-1.0" max="1.0" step="0.005" value="-1.0" />
+          </label>
+        </div>
+
+        <!-- Living Complex Ginzburg-Landau PDE -->
+        <div class="group">
+          <div class="group-title">LIVING CGLE CHIMERA PDE</div>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Dispersion Chaos (c₁)</span><em id="val-c1">1.35</em></span>
+            <input id="sl-c1" type="range" min="-2.2" max="2.4" step="0.01" value="1.35" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Nonlinear Shift (c₂)</span><em id="val-c2">-1.15</em></span>
+            <input id="sl-c2" type="range" min="-2.4" max="2.2" step="0.01" value="-1.15" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Morphogenesis Relief</span><em id="val-relief">0.65</em></span>
+            <input id="sl-relief" type="range" min="0.0" max="1.5" step="0.01" value="0.65" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Bioluminescent Capillaries</span><em id="val-glow">0.85</em></span>
+            <input id="sl-glow" type="range" min="0.0" max="2.0" step="0.01" value="0.85" />
+          </label>
+
+          <div class="btn-row">
+            <button id="btn-seed-spiral" class="mini-btn">SEED VORTICES</button>
+            <button id="btn-seed-ring" class="mini-btn">RESONANT RING</button>
+          </div>
+        </div>
+
+        <!-- Spectral Optics & Cinema Lens -->
+        <div class="group">
+          <div class="group-title">SPECTRAL OPTICS &amp; LENS</div>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Thin-Film Thickness (nm)</span><em id="val-film">540</em></span>
+            <input id="sl-film" type="range" min="160" max="1250" step="2" value="540" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Iridescence Intensity</span><em id="val-irid">0.90</em></span>
+            <input id="sl-irid" type="range" min="0.0" max="1.8" step="0.01" value="0.90" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Diffraction Micro-Sparkle</span><em id="val-sparkle">0.65</em></span>
+            <input id="sl-sparkle" type="range" min="0.0" max="2.0" step="0.01" value="0.65" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Volumetric Scattering</span><em id="val-vol">0.85</em></span>
+            <input id="sl-vol" type="range" min="0.0" max="1.8" step="0.01" value="0.85" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Lens Aperture (Bokeh)</span><em id="val-aperture">0.014</em></span>
+            <input id="sl-aperture" type="range" min="0.0" max="0.075" step="0.001" value="0.014" />
+          </label>
+
+          <label class="slider-row">
+            <span class="s-head"><span>Exposure</span><em id="val-exposure">1.15</em></span>
+            <input id="sl-exposure" type="range" min="0.45" max="2.2" step="0.01" value="1.15" />
+          </label>
+        </div>
+
+        <!-- Shortcuts Reference -->
+        <div class="group hints">
+          <div><b>DRAG</b> Orbit · <b>R-DRAG</b> Pan · <b>SCROLL</b> Log Zoom</div>
+          <div><b>CLICK / SHIFT+DRAG</b> Inject 3D PDE Singularity</div>
+          <div><b>DBL-CLICK</b> Rack Autofocus · <b>SPACE</b> Path-Refine</div>
+          <div><b>1–6</b> Specimens · <b>M</b> Mutate · <b>H</b> Pure Canvas</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Gallery Control Dock -->
+    <nav class="dock" aria-label="Specimen Selector">
+      <div class="specimens" id="specimen-bar">
+        <button class="spec-btn active" data-regime="0">
+          <span class="num">I</span><span class="name">ANEMONE</span>
+        </button>
+        <button class="spec-btn" data-regime="1">
+          <span class="num">II</span><span class="name">KIFS CLIFF</span>
+        </button>
+        <button class="spec-btn" data-regime="2">
+          <span class="num">III</span><span class="name">CHIMERA FOAM</span>
+        </button>
+        <button class="spec-btn" data-regime="3">
+          <span class="num">IV</span><span class="name">RADIOLARIAN</span>
+        </button>
+        <button class="spec-btn" data-regime="4">
+          <span class="num">V</span><span class="name">SERAPH</span>
+        </button>
+        <button class="spec-btn" data-regime="5">
+          <span class="num">VI</span><span class="name">HYBRID</span>
+        </button>
+      </div>
+
+      <div class="dock-divider"></div>
+
+      <div class="actions">
+        <button id="btn-refine" class="act-btn" title="Freeze time & accumulate 256-sample cinema path trace [Space]">
+          REFINE
+        </button>
+        <button id="btn-mutate" class="act-btn" title="Discover a novel 1/1 mathematical mutation [M]">
+          MUTATE
+        </button>
+        <button id="btn-orbit" class="act-btn active" title="Toggle smooth gallery drift [C]">
+          DRIFT
+        </button>
+        <button id="btn-audio" class="act-btn" title="Toggle live Piezo-Optical Web Audio synthesis [A]">
+          AUDIO
+        </button>
+        <button id="btn-capture" class="act-btn" title="Export crisp PNG frame [P]">
+          SNAP
+        </button>
+        <button id="btn-hide" class="act-btn" title="Hide interface [H]">
+          HIDE
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Minimal floating restore pill when HUD is hidden -->
+  <button id="btn-show-hud" class="restore-hud hidden" title="Show Interface [H]">
+    XENOPHORA · [H]
+  </button>
+
+  <!-- Subtle ephemeral toast -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
